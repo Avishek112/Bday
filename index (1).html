@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0a0d23">
+<title>Aindrila's Little Universe ✨</title>
+<style>
+:root{--bg:#090d20;--lav:#e6dcff;--gold:#ffe5a6;--pink:#ffcce8;--ink:#201b45}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#303466 0%,#171b3d 40%,#080b1d 100%);color:#f8f5ff;font-family:system-ui,-apple-system,Segoe UI,sans-serif;min-height:100vh;overflow-x:hidden}
+#sky{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
+main{position:relative;z-index:1;max-width:760px;margin:auto;padding:18px 16px 56px}
+nav{display:flex;align-items:center;justify-content:space-between;gap:8px;color:#c6c5e9;font-size:.82rem;margin:4px 0 20px}
+.pill{border:1px solid #ffffff2b;border-radius:99px;padding:7px 11px;background:#ffffff0a}
+#progress{height:4px;background:#ffffff17;border-radius:9px;overflow:hidden;margin-bottom:22px}#bar{height:100%;width:0;background:linear-gradient(90deg,#c6a9ff,#ffe5a6);transition:width .5s}
+.scene{display:none;min-height:68vh;align-items:center;justify-content:center;text-align:center;flex-direction:column;animation:in .45s ease}.scene.active{display:flex}
+.eyebrow{font-size:.74rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+h1,h2{font-family:Georgia,'Times New Roman',serif;font-weight:500;line-height:1.1;margin:0 0 16px}h1{font-size:clamp(2.7rem,10vw,5rem);color:#fff2d2;text-shadow:0 0 30px #c0a9ff55}h2{font-size:clamp(2rem,7vw,3.1rem)}
+p{max-width:560px;color:#e0e1f7;line-height:1.72;font-size:1.02rem;margin:0 auto 16px}
+.orb{width:128px;height:128px;border-radius:50%;display:grid;place-items:center;font-size:3.3rem;margin:0 auto 24px;background:radial-gradient(circle at 34% 28%,#fff8db,#d6baff 18%,#7663c4 47%,#262451 73%);box-shadow:0 0 32px #b8a7ff55,0 0 90px #9380ff2b;animation:float 4s ease-in-out infinite}
+.btnrow{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:12px}
+button{font:inherit;font-size:.94rem;font-weight:700;border:1px solid #d6caff66;border-radius:999px;padding:12px 18px;background:var(--lav);color:var(--ink);cursor:pointer;transition:transform .18s,background .18s}
+button:hover{transform:translateY(-2px);background:#fff0c8}button:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+button.alt,.choice{background:#ffffff0b;color:#f6f1ff;border-color:#ffffff35}button.alt:hover,.choice:hover{background:#ffffff20}
+.card{width:100%;max-width:540px;padding:22px 18px;border:1px solid #ffffff2b;background:#ffffff0b;border-radius:22px;box-shadow:0 20px 70px #0002}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;width:100%;max-width:520px}.choice{text-align:left;border-radius:16px;min-height:64px;line-height:1.35}
+.grid .choice{display:flex;align-items:center;gap:9px}.choice .emoji{font-size:1.45rem}
+#toast,#quizToast,#wishToast{min-height:1.4em;color:var(--gold);font-size:.9rem;margin-top:10px}
+.constellation{width:min(100%,440px);height:235px;position:relative;border:1px solid #ffffff20;border-radius:20px;background:#ffffff05;margin:8px 0 14px;overflow:hidden}
+.starbtn{position:absolute;border:0;padding:0;width:38px;height:38px;background:transparent;color:#ffe8a8;font-size:1.65rem;box-shadow:none;animation:twinkle 1.7s infinite alternate}.starbtn:hover{background:transparent;transform:scale(1.25)}
+.note{display:none;text-align:left;background:#fff9e9;color:#30284f;padding:18px;border-radius:14px;line-height:1.65;margin-top:12px}.note.show{display:block;animation:in .3s ease}.note p{color:#30284f;margin:0}
+.meter{height:8px;max-width:520px;width:100%;background:#ffffff18;border-radius:9px;margin:10px 0 18px;overflow:hidden}.meter>div{height:100%;width:0;background:linear-gradient(90deg,#c9a8ff,#ffe5a6);transition:width .3s}
+.letter{font-family:Georgia,serif;font-size:1.12rem;line-height:1.8;color:#fff0ca}.tiny{font-size:.82rem;color:#b8bbdf}
+footer{text-align:center;color:#999dc6;font-size:.78rem;margin-top:28px}
+@keyframes in{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}@keyframes float{50%{transform:translateY(-9px)}}@keyframes twinkle{from{opacity:.5}to{opacity:1;text-shadow:0 0 14px #ffe5a6}}
+@media(max-width:430px){.grid{grid-template-columns:1fr}.orb{width:108px;height:108px}.card{padding:18px 14px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body><canvas id="sky" aria-hidden="true"></canvas>
+<main>
+<nav><span>✦ A LITTLE UNIVERSE</span><span class="pill">⭐ Stars found: <b id="count">0</b>/5</span></nav>
+<div id="progress"><div id="bar"></div></div>
+
+<section class="scene active" id="s0">
+ <div class="orb">🌙</div><div class="eyebrow">A tiny birthday adventure</div>
+ <h1>Hey, Aindrila.</h1><p>A little star has gone missing from the sky. It left a trail of tiny surprises—and a birthday wish meant just for you.</p>
+ <p class="tiny">Your mission: explore, make a few choices, and collect 5 hidden stars. ✨</p>
+ <div class="btnrow"><button onclick="go(1)">Begin the adventure ✨</button></div>
+</section>
+
+<section class="scene" id="s1">
+ <div class="eyebrow">Chapter 1 · Choose your path</div><h2>Where should we go first?</h2><p>Every path leads somewhere magical. Pick whichever feels right.</p>
+ <div class="grid">
+  <button class="choice" onclick="path('moon')"><span class="emoji">🌙</span><span>Moonlit lake<br><small>A calm, quiet glow</small></span></button>
+  <button class="choice" onclick="path('comet')"><span class="emoji">☄️</span><span>Comet highway<br><small>Fast, funny, sparkly</small></span></button>
+  <button class="choice" onclick="path('nebula')"><span class="emoji">🪐</span><span>Colourful nebula<br><small>A world of wonder</small></span></button>
+  <button class="choice" onclick="path('garden')"><span class="emoji">🌷</span><span>Stardust garden<br><small>Flowers made of light</small></span></button>
+ </div><div id="pathToast"></div>
+</section>
+
+<section class="scene" id="s2">
+ <div class="eyebrow">Chapter 2 · A message in the stars</div><div class="orb" id="pathOrb">🌙</div><h2 id="pathTitle">A gentle kind of magic.</h2>
+ <p id="pathCopy"></p><p>One star is hiding in this little constellation. Tap it to reveal the note it left behind.</p>
+ <div class="constellation" aria-label="Interactive constellation">
+  <button class="starbtn" style="left:12%;top:20%" onclick="revealStar(0)" aria-label="Reveal star 1">✦</button>
+  <button class="starbtn" style="left:43%;top:12%" onclick="revealStar(1)" aria-label="Reveal star 2">✧</button>
+  <button class="starbtn" style="left:72%;top:27%" onclick="revealStar(2)" aria-label="Reveal star 3">✦</button>
+  <button class="starbtn" style="left:27%;top:63%" onclick="revealStar(3)" aria-label="Reveal star 4">✧</button>
+  <button class="starbtn" style="left:65%;top:67%" onclick="revealStar(4)" aria-label="Reveal star 5">✦</button>
+ </div>
+ <div class="card"><div id="starNote" class="note"><p></p></div><div class="btnrow"><button onclick="go(3)">Continue the story →</button></div></div>
+</section>
+
+<section class="scene" id="s3">
+ <div class="eyebrow">Chapter 3 · A tiny birthday quiz</div><div class="orb">💫</div><h2>Choose the universe's treasure.</h2>
+ <p>What makes an ordinary day feel a little brighter?</p>
+ <div class="grid">
+  <button class="choice" onclick="quiz('joke')">😂 A perfectly timed silly joke</button>
+  <button class="choice" onclick="quiz('kindness')">💛 A small act of kindness</button>
+  <button class="choice" onclick="quiz('cake')">🎂 Cake. Obviously, cake.</button>
+  <button class="choice" onclick="quiz('all')">✨ A little bit of everything</button>
+ </div><div id="quizToast" role="status" aria-live="polite"></div>
+</section>
+
+<section class="scene" id="s4">
+ <div class="eyebrow">Chapter 4 · Unlock the birthday capsule</div><div class="orb">🗝️</div><h2>A message is waiting.</h2>
+ <p>The star's birthday capsule is locked. Pick a key to open it. (Don't worry—there's no wrong answer.)</p>
+ <div class="btnrow">
+  <button onclick="unlock('gold')">🔑 Golden key</button><button class="alt" onclick="unlock('silver')">🗝️ Silver key</button><button class="alt" onclick="unlock('moon')">🌙 Moon key</button>
+ </div><div id="capsule" class="note"><p></p></div>
+ <div class="btnrow"><button onclick="go(5)">Open the final letter 💌</button></div>
+</section>
+
+<section class="scene" id="s5">
+ <div class="eyebrow">The final chapter · Just for you</div><div class="orb">🎂</div><h2>Happy Birthday, Aindrila!</h2>
+ <div class="card">
+  <p class="letter">May this new chapter bring you peaceful days, unexpected reasons to laugh, dreams that feel closer, and people who remind you how much you matter.</p>
+  <p>Thank you for being a lovely part of my world and for the little moments that make friendship special. I hope you keep finding magic in ordinary days—and that today gives you plenty of reasons to smile.</p>
+  <p class="letter">Keep shining, birthday star. 🌟</p>
+  <p class="tiny">— From your friend, Avishek 💛</p>
+ </div>
+ <div class="btnrow"><button onclick="wish()">Make a wish ✨</button><button class="alt" onclick="copyMsg()">Copy birthday message</button><button class="alt" onclick="restart()">Start again ↺</button></div>
+ <div id="wishToast" role="status" aria-live="polite"></div>
+</section>
+<footer>Made of stardust, friendship, and birthday wishes ✦</footer>
+</main>
+<script>
+const scenes=[...document.querySelectorAll('.scene')];let current=0,found=new Set(),chosenPath='moon';
+function go(n){current=n;scenes.forEach((s,i)=>s.classList.toggle('active',i===n));document.getElementById('bar').style.width=(n/5*100)+'%';window.scrollTo({top:0,behavior:'smooth'});}
+function path(k){chosenPath=k;const d={
+ moon:['🌙','A gentle kind of magic.','The moonlit lake is quiet, but its reflection is full of tiny lights. It reminds the star that a kind message, a shared laugh, or someone who listens can brighten a whole day.'],
+ comet:['☄️','A trail of bright moments.','The comet zooms past galaxies collecting silly jokes, unexpected laughs, and small moments that become favourite memories. Sometimes the best magic is simply having someone to laugh with.'],
+ nebula:['🪐','A universe of colours.','The nebula swirls with a thousand colours. It reminds the star that everyone brings something unique to the world, and every person deserves to be celebrated just as they are.'],
+ garden:['🌷','A garden that glows.','Tiny flowers bloom wherever the star travels. Each one stands for kindness, patience, courage, and the little things people do that make friendship feel warm.']
+ }[k];document.getElementById('pathOrb').textContent=d[0];document.getElementById('pathTitle').textContent=d[1];document.getElementById('pathCopy').textContent=d[2];go(2);}
+const notes=[
+ 'A reminder: you deserve kindness on ordinary days, not only on birthdays. 💛',
+ 'May you always find a reason to laugh—even on a day that starts out a little cloudy. 😂',
+ 'You do not have to be perfect to make the world brighter. Just being yourself is enough. ✨',
+ 'May good things find you gently, and may you always have people cheering you on. 🌷',
+ 'Friendship is made of little moments—and those little moments can mean a lot. ⭐'
+];
+function revealStar(i){if(found.has(i)){document.getElementById('starNote').classList.add('show');document.querySelector('#starNote p').textContent=notes[i];return}found.add(i);document.getElementById('count').textContent=found.size;document.querySelector('#starNote p').textContent=notes[i];document.getElementById('starNote').classList.add('show');document.querySelectorAll('.starbtn')[i].textContent='🌟';document.getElementById('starNote').scrollIntoView({behavior:'smooth',block:'nearest'});}
+function quiz(a){const m={joke:'Correct answer: a good laugh is basically stardust for the soul. 😂',kindness:'The universe approves. Small kindness can leave a surprisingly big glow. 💛',cake:'The galaxy would like to formally endorse this answer. 🎂',all:'A wise choice! The best days often mix laughter, kindness, and a little treat. ✨'};document.getElementById('quizToast').textContent=m[a]+' Moving to the next chapter…';setTimeout(()=>go(4),1600);}
+function unlock(k){const m={gold:'Golden-key message: May your hopes grow brighter and your days bring happy surprises. ✨',silver:'Silver-key message: Never forget how much warmth a thoughtful friend can bring to the world. 💛',moon:'Moon-key message: Even the quietest stars are still shining. Keep being wonderfully you. 🌙'};const el=document.getElementById('capsule');el.querySelector('p').textContent=m[k];el.classList.add('show');}
+function wish(){const c=document.getElementById('wishToast');c.textContent='Close your eyes for a second and make a wish. The universe is listening. 🌠';const cv=document.getElementById('sky'),cx=cv.getContext('2d');for(let i=0;i<100;i++){let x=Math.random()*innerWidth,y=Math.random()*innerHeight;cx.fillStyle=['#ffe5a6','#ffcce8','#e6dcff'][i%3];cx.beginPath();cx.arc(x,y,Math.random()*3+1,0,Math.PI*2);cx.fill();}}
+async function copyMsg(){const m='Happy Birthday, Aindrila! 🎂✨ May this new chapter bring you peaceful days, unexpected reasons to laugh, dreams that feel closer, and people who remind you how much you matter. Thank you for being a lovely part of my world and for the little moments that make friendship special. Keep shining, birthday star. 🌟 — Avishek 💛';try{await navigator.clipboard.writeText(m);document.getElementById('wishToast').textContent='Birthday message copied! 💛';}catch(e){document.getElementById('wishToast').textContent='Select and copy the birthday letter above. 💛';}}
+function restart(){found.clear();document.getElementById('count').textContent='0';document.querySelectorAll('.starbtn').forEach((b,i)=>b.textContent=i%2?'✧':'✦');document.getElementById('starNote').classList.remove('show');document.getElementById('capsule').classList.remove('show');document.getElementById('quizToast').textContent='';document.getElementById('wishToast').textContent='';go(0);}
+const cv=document.getElementById('sky'),cx=cv.getContext('2d');let stars=[];
+function resize(){cv.width=innerWidth*devicePixelRatio;cv.height=innerHeight*devicePixelRatio;cv.style.width=innerWidth+'px';cv.style.height=innerHeight+'px';cx.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0);stars=Array.from({length:Math.min(150,Math.floor(innerWidth/4))},()=>({x:Math.random()*innerWidth,y:Math.random()*innerHeight,r:Math.random()*1.5+.3,a:Math.random(),v:Math.random()*.012+.002}));}
+function draw(){cx.clearRect(0,0,innerWidth,innerHeight);for(const s of stars){s.a+=s.v;if(s.a>1||s.a<.15)s.v*=-1;cx.globalAlpha=Math.max(.15,Math.min(1,s.a));cx.fillStyle='#fff4d6';cx.beginPath();cx.arc(s.x,s.y,s.r,0,Math.PI*2);cx.fill()}cx.globalAlpha=1;requestAnimationFrame(draw)}
+addEventListener('resize',resize);resize();draw();
+</script></body></html>
